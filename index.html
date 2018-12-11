@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110075898-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hydraulic Alternative Application System</title>
+
+    <!-- adição do JavaScript e arquivo jquery -->
+    <script language="JavaScript" src="codigo.js"></script>
+    <script src="jquery-3.2.1.js" ></script>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estilo.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    
+
+   
+   <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente "  >
+      <div class="container">
+        
+        <!-- header -->
+        <div class="navbar-header">
+          
+          <!-- botao toggle -->
+          <button type="button" class=" navbar-toggle collapsed"
+                  data-toggle="collapse" data-target="#barra-navegacao">
+            <span class="sr-only">alternar navegação</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a href="../index.html" class="navbar-brand">
+            <span >Haas online</span>
+          </a>
+
+        </div>
+
+        <!-- navbar -->
+        <div class="collapse navbar-collapse" id="barra-navegacao" style="width: 90%;">
+        <ul class="nav navbar-nav navbar-right"  >
+        <li class="nav navbar-nav navbar-left">
+                
+                
+              </li>
+        </ul>
+          <ul class="nav navbar-nav navbar-right"  >
+            <li><a href="#ancora_regime_escoamento">Regime de escoamento</a></li>
+            <li><a href="#ancora_perda_carga">Perda de carga</a></li>
+            <li><a href="#ancora_pecas_escpeciais">Peças especiais</a></li>
+            <li><a href="#ancora_npsh_disponivel">NPSH Disponível</a></li>
+            <li><a href="#ancora_potencia_bomba">Potência consumida</a></li>
+          </ul>
+        </div>
+      </div><!-- /container -->
+    </nav><!-- /nav -->
+
+   <div class="capa">   	  
+
+      <div class="texto-capa">
+            <br><br>
+      	    <h2  >HAAS <sup>web</sup>  </h2> <br>
+        	<h2>Hydraulic Alternative Application System</h2>
+        <a  href="#ancora_regime_escoamento" class="btn btn-custom btn-roxo btn-lg" >Iniciar projeto</a>
+        <br><br><br><br><br><br>
+       <!-- <a href="" class="btn btn-custom btn-branco btn-lg ">Documentação</a> ->
+      </div>
+    </div>
+
+
+    <!-- Conteudos regime de escoamento -->
+    <section id="regime_escoamento" >
+      <div class="container"  >
+        <div class="row">
+
+        	<!-- Parte esquerda -->
+          <div class="col-md-12 "   >
+
+            <h2  align="center" ><a name="ancora_regime_escoamento"></a>Regime de escoamento</h2>
+          </div>
+
+           <!-- Parte esquerda -->
+          <div class="col-md-6 ">
+
+          	<hr />
+
+            <h3 align="center">Tubulação de sucção</h3>  
+
+            <hr />
+
+              <h3 " align="center" >Diâmetro, em m</h3>
+              <p ><input title="hint" id="diametro_tub_succao_Id" class="form-control estilo-caixa" type="number" step="0.01" min="0"  placeholder="Indique o diâmetro em m" ></p>
+
+			      <hr />
+
+              <h3>Vazão, em m³.s<sup>-1</sup></h3>
+            
+              <p ><input class=" form-control estilo-caixa" type="number" step="0.01" min="0" id="vazao_tub_succao_Id" placeholder="indique a vazão em m³/s" onchange="copiar_vazao()" >
+              </p>
+          
+            <hr />
+
+            <h3>Viscosidade cinemátrica, em m².s<sup>-1</sup></h3>
+            <p><input value="0.000001" class="form-control estilo-caixa" type="number" step="0.01" min="0" name="" id="viscosidade_cinematica_tub_succao_Id" placeholder="Viscosidade cinemátrica" readonly></p>
+
+			<hr />
+
+            <h3>Velocidade de escoamento, em m.s<sup>-1</sup></h3>
+            <p><input class="form-control estilo-caixa" type="number" step="0.01" min="0" id="velocidade_tub_succao_Id" placeholder="velocidade de escoamento m/s" readonly></p>
+
+            <hr />
+
+            <h3>Número de reynolds, adimensional</h3>
+            <p><input class="form-control estilo-caixa" type="number" step="0.01" min="0" name="" id="numero_reynolds_tub_succao_Id" placeholder="Número de Reynolds, adimensional" readonly></p>
+
+            <hr />
+
+            <h3>Classificação do regime de escoamento</h3>
+            <p><input class="form-control estilo-caixa" type="text" id="classificacao_reg_tub_succao_Id" placeholder="classificação do regime de escoamento (laminar, transição ou turbulento)" readonly></p>
+
+            <div class="col-md-12 " align="center">
+            	<button onclick="calculos_reg_tub_succao()" class="btn-calcular form-control" id="btnCalcular_regime_tub_succao" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular</button>
+            </div>
+           
+
+          </div>
+
+          <!-- Parte direita -->
+          <div class="col-md-6 " >
+
+          	<hr />
+
+            <h3 align="center">Tubulação de recalque</h3>  
+
+            <hr />
+
+            <h3>Diâmetro, em m</h3>
+            <p><input class="form-control estilo-caixa" id="diametro_tub_recalque_Id" type="number" step="0.01" min="0" name="" id="diametro_tub_succao_Id" placeholder="Indique o diâmetro em m" ></p>
+
+            			
+      <hr />
+
+            <h3>Vazão, em m³.s<sup>-1</sup></h3>
+            
+              <p ><input class=" form-control estilo-caixa" type="number" step="0.01" min="0" id="vazao_tub_recalque_Id" placeholder="Vazão em m³/s" readonly="true" >
+              </p>
+            
+
+            <hr/>
+
+            <h3>Viscosidade cinemátrica, em m².s<sup>-1</sup></h3>
+            <p><input value="0.000001" class="form-control estilo-caixa" type="number" step="0.01" min="0" id="viscosidade_cinematica_tub_recalque_Id" placeholder="Viscosidade cinemátrica" readonly></p>
+
+			<hr />
+
+            <h3>Velocidade de escoamento, em m.s<sup>-1</sup></h3>
+            <p><input class="form-control estilo-caixa" type="number" step="0.01" min="0" id="velocidade_tub_recalque_Id" placeholder="velocidade de escoamento m/s" readonly></p>
+
+            <hr />
+
+            <h3>Número de reynolds, adimensional</h3>
+            <p><input class="form-control estilo-caixa"type="number" step="0.01" min="0" id="numero_reynolds_tub_recalque_Id"  placeholder="Número de Reynolds, adimensional" readonly></p>
+
+            <hr />
+
+            <h3>Classificação do regime de escoamento</h3>
+            <p><input class="form-control estilo-caixa" type="text" id="classificacao_reg_tub_recalque_Id" placeholder="classificação do regime de escoamento (laminar, transição ou turbulento)" readonly></p>
+
+            <div class="col-md-12 " align="center">
+            	<button onclick="calculos_reg_tub_recalque()" class="btn-calcular form-control" id="btnCalcular_regime_tub_recalque" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular</button>
+            </div>
+
+          </div>
+          
+        </div>
+        <hr>
+      </div>
+    </section>
+	<!--Final do Conteúdo sobre regime de escoamento -->
+<!--************************************************************************************************************************* -->
+    <!-- Conteudos Perda de carga -->
+    <section id="perda_carga" >
+      <div class="container"  >
+        <div class="row">
+
+        	<!-- Parte esquerda -->
+          <div class="col-md-12 "  >
+            <h2  align="center" ><a name="ancora_perda_carga"></a>Perda de carga</h2>
+          </div>
+
+           <!-- Parte esquerda -->
+          <div class="col-md-6 " >
+
+          	<hr />
+
+            <h3 align="center">Tubulação de Sucção</h3>
+
+            <hr />
+
+            <select onchange="atribuir_valores_paraequacoes_perda_carga_succao()" id="material_tubulacao_succaoId" class="form-control  border-radius-15" >
+            	<option >Aço corrugado (chapa ondulada)</option>
+            	<option>Aço com juntas lock-bar, em serviço</option>
+            	<option>Aço com juntas lock-bar, tubos novos</option>
+            	<option>Aço galvanizado</option>
+            	<option>Aço rebitado, em uso</option>
+            	<option>aço rebitado, tubos novos</option>
+            	<option>Aço soldado, em uso</option>
+            	<option>Aço soldado com revestimento especial</option>
+            	<option>Cobre</option>
+            	<option>Concreto, bom acabamento</option>
+            	<option>Ferro fundido, novos</option>
+            	<option>Ferro fundido, usados</option>
+            	<option>Ferro fundido, após 15-20 anos de uso</option>
+            	<option>Ferro revestido de cimento</option>
+            	<option>Madeira em aduelas</option>
+            	<option>Tubos plástico (P.V.C, entre outros)</option>
+            </select>
+
+            <hr>
+
+            <h3>Diâmetro, em m</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="diametro_perda_carga_succao_Id" placeholder="diâmetro em m" readonly ></p>
+
+            <hr>
+
+            <h3>Comprimento da tubulação, em m</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="comprimento_tub_succaoId" placeholder="Digite o comprimento da tubulação em m" ></p>
+
+            <hr>
+
+            <h3>Rugosidade Absoluta para Darcy-Weisbach</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_rug_abs_darcy_succaoId" placeholder="Rugosidade absoluta para a equação universal de Darcy-Weisback" readonly></p>
+
+            <hr>
+
+            <h3>Fator de atrito para Darcy-Weisbach</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="fator_atrito_darcy_succaoId" placeholder="Rugosidade absoluta para a equação universal de Darcy-Weisback" readonly></p>
+
+            <hr>
+
+            <h3>Coef. rug. para Hazen-Willians</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_rug_hazenwillians_succaoId" placeholder="Coeficiente de Rugosidade para a equação de Hazen-Willians" readonly></p>
+
+            <hr>
+
+            <h3>Coef. atrito para Flaman</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_atrito_flaman_succaoId" placeholder="coeficiente de atrito para a equação de Flaman" readonly></p>
+
+            <div class="col-md-12 " align="center">
+              <button onclick="perda_carga_tub_succao()" class="btn-calcular form-control" id="btnCalcular_perda_tub_succao" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular</button>
+            </div>
+           
+          </div>
+
+          <!-- Parte direita sobre a tubulação de recalque-->
+          <div class="col-md-6" >
+
+          	<hr />
+
+            <h3 align="center">Tubulação de recalque</h3> 
+
+            <hr />
+
+            <select onchange="atribuir_valores_paraequacoes_perda_carga_recalque()" id="material_tubulacao_recalqueId" class="form-control border-radius-15" >
+            	<option>Aço corrugado (chapa ondulada)</option>
+            	<option>Aço com juntas lock-bar, em serviço</option>
+            	<option>Aço com juntas lock-bar, tubos novos</option>
+            	<option>Aço galvanizado</option>
+            	<option>Aço rebitado, em uso</option>
+            	<option>aço rebitado, tubos novos</option>
+            	<option>Aço soldado, em uso</option>
+            	<option>Aço soldado com revestimento especial</option>
+            	<option>Cobre</option>
+            	<option>Concreto, bom acabamento</option>
+            	<option>Ferro fundido, novos</option>
+            	<option>Ferro fundido, usados</option>
+            	<option>Ferro fundido, após 15-20 anos de uso</option>
+            	<option>Ferro revestido de cimento</option>
+            	<option>Madeira em aduelas</option>
+            	<option>Tubos plástico (P.V.C, entre outros)</option>
+            </select> 
+
+            <hr>
+
+            <h3>Diâmetro, em m</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="diametro_perda_carga_recalque_Id" placeholder="diâmetro em m" readonly></p>
+
+            <hr>
+
+            <h3>Comprimento da tubulação, em m</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="comprimento_tub_recalqueId" placeholder="Digite o comprimento da tubulação em m" ></p>
+
+            <hr>
+
+            <h3>Rugosidade Absoluta para Darcy-Weisbach</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_rug_abs_darcy_recalqueId" placeholder="Rugosidade absoluta para a equação universal de Darcy-Weisback" readonly></p>
+
+            <hr>
+
+            <h3>Fator de atrito para Darcy-Weisbach</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="fator_atrito_darcy_recalqueId" placeholder="Rugosidade absoluta para a equação universal de Darcy-Weisback" readonly></p>
+
+            <hr>
+
+            <h3>Coef. rug. para Hazen-Willians</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_rug_hazenwillians_recalqueId" placeholder="Coeficiente de Rugosidade para a equação de Hazen-Willians" readonly></p>
+
+            <hr>
+
+            <h3>Coef. atrito para Flaman</h3>
+            <p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="coef_atrito_flaman_recalqueId" placeholder="coeficiente de atrito para a equação de Flaman" readonly></p>
+
+            <div class="col-md-12 " align="center">
+              <button onclick="perda_carga_tub_recalque()" class="btn-calcular form-control" id="btnCalcular_perda_tub_recalque" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular</button>
+            </div>
+          	
+          </div>
+
+          	</div class="col-md-12" >
+
+          		<hr>
+
+          		<h3 align="center">Resultados para perdas de carga</h3>
+
+          		<hr>
+
+          		<div class="col-md-12 border-radius-15">
+          			<h3 align="center">Para tubulação de sucção</h3>
+          		</div>
+
+          		<hr>
+
+          		<div class="col-md-4 ">
+          			<h3 align="center">Por Darcy-Wesiback</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_darcy_tub_succaoId" placeholder="Perda de carga calculada por Darcy-Wesiback" readonly></p>
+          		</div>
+
+          		<div class="col-md-4 ">
+          			<h3 align="center">Por Hazen-Willians</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_hazenwillians_tub_succaoId" placeholder="Perda de carga calculada por Hazen-Willians" readonly></p>
+          		</div>
+
+          		<div class="col-md-4">
+          			<h3 align="center">Por Flamant</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_flamant_tub_succaoId" placeholder="Perda de carga calculada por Flaman" readonly></p>
+          		</div>
+
+          		<div class="col-md-12">
+          			<h3 align="center">Observações</h3>
+          			<p><input class="form-control border-radius-15" type="text" name="" placeholder="Aqui aparecerão observações, se houverem" readonly></p>
+          		</div>
+
+          		<!-- Aqui começam os dados para tubulação de recalque -->
+
+          		
+
+				<div class="col-md-12 border-radius-15">
+          <hr>
+          			<h3 align="center">Para tubulação de recalque</h3>
+          		</div>
+
+          		<hr>
+
+          		<div class="col-md-4 ">
+          			<h3 align="center">Por Darcy-Wesiback</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_darcy_tub_recalqueId" placeholder="Perda de carga calculada por Darcy-Wesiback" readonly></p>
+          		</div>
+
+          		<div class="col-md-4 ">
+          			<h3 align="center">Por Hazen-Willians</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_hazenwillians_tub_recalqueId" placeholder="Perda de carga calculada por Hazen-Willians" readonly></p>
+          		</div>
+
+          		<div class="col-md-4 ">
+          			<h3 align="center">Por Flamant</h3>
+          			<p><input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_carga_flamant_tub_recalqueId" placeholder="Perda de carga calculada por Flaman" readonly></p>
+          		</div>
+
+          		<div class="col-md-12">
+          			<h3 align="center">Observações</h3>
+          			<p><input class="form-control border-radius-15" type="text" name="" placeholder="Aqui aparecerão observações, se houverem" readonly></p>
+          		</div>
+          	<div >
+
+        </div>
+      </div>
+    </section>
+	<!--Final do Conteúdo sobre perda de carga -->
+
+    <!--Início do conteúdo sobre peças especiais -->
+<!--************************************************************************************************************************* -->
+  <section >
+    <div class="container" id="perda_pecas_especiais">
+      <div class="row">
+        <div align="center" class="col-md-12">
+          <h2><a name="ancora_pecas_escpeciais"></a>Perda de carga em peças especiais </h2><br><br>
+        </div>
+        <div align="center" class="col-md-6">
+          <table class="table box-shadow-padrao" style="background-color: #FFF; ">
+            <tr>
+              <td><b>Peça especiais</b></td>
+              <td align="center"><b>Coeficiente K</b></td>
+            </tr>
+
+            <tr>
+              <td>Ampliação gradual</td>
+              <td align="center">0,3</td>
+            </tr>
+            <tr>
+              <td>Redução gradual</td>
+              <td align="center">0,15</td>
+            </tr>
+            <tr>
+              <td>Bocais</td>
+              <td align="center">2,75</td>
+            </tr>
+            <tr>
+              <td>Medidor Venturi</td>
+              <td align="center">2,75</td>
+            </tr>
+            <tr>
+              <td>Tê, passagem direta</td>
+              <td align="center">0,9</td>
+            </tr>
+            <tr>
+              <td>Tê, saída lateral</td>
+              <td align="center">2</td>
+            </tr>
+            <tr>
+              <td>Comporta aberta</td>
+              <td align="center">1</td>
+            </tr>
+            <tr>
+              <td>Cotovelo de 90° raio curto</td>
+              <td align="center">0,9</td>
+            </tr>
+            <tr>
+              <td>Cotovelo de 90° raio longo</td>
+              <td align="center">0,6</td>
+            </tr>
+            <tr>
+              <td>Cotovelo de 45°</td>
+              <td align="center">0,4</td>
+            </tr>
+            <tr>
+              <td>Curva de 90°</td>
+              <td align="center">0,4</td>
+            </tr>
+            
+          </table>
+        </div>
+        <div class="col-md-6" align="center">
+          <table class="table box-shadow-padrao" style="background-color: #FFF;">
+            <tr>
+              <td><b>Peça especiais</b></td>
+              <td align="center"><b>Coeficiente K</b></td>
+            </tr>
+            <tr>
+              <td>Curva de 45°</td>
+              <td align="center">0,2</td>
+            </tr>
+            <tr>
+              <td>Curva de 22,5°</td>
+              <td align="center">0,1</td>
+            </tr>
+            <tr>
+              <td>Curva de retorno 180°</td>
+              <td align="center">2,20</td>
+            </tr>
+            <tr>
+              <td>Válvula de gaveta aberta</td>
+              <td align="center">0,15</td>
+            </tr>
+            <tr>
+              <td>Válvula de ângulo aberta</td>
+              <td align="center">5</td>
+            </tr>
+            <tr>
+              <td>Válvula de globo aberta</td>
+              <td align="center">10</td>
+            </tr>
+            <tr>
+              <td>Válvula de borboleta aberta</td>
+              <td align="center">0,3</td>
+            </tr>
+            <tr>
+              <td>Válvula de pé com crivo</td>
+              <td align="center">10</td>
+            </tr>
+            <tr>
+              <td>Válvula de retenção</td>
+              <td align="center">3</td>
+            </tr>
+            <tr>
+              <td>Válvula de bóia</td>
+              <td align="center">3</td>
+            </tr>
+            <tr>
+              <td>Saída de tubulação</td>
+              <td align="center">1</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-md-4" align="center" style="padding-top: 20px;">
+            <h3>Peça especial</h3> <br>
+            <select class="form-control border-radius-15 col-md-4" onchange="atribuir_valor_coef_k_pecas_especiais()" style="border: 1px #FFF;" id="peca_selecionada"  >
+              <option>Ampliação gradual</option>
+              <option>Redução gradual</option>
+              <option>Bocais</option>
+              <option>Medidor Venturi</option>
+              <option>Tê, passagem direta</option>
+              <option>Tê, saída lateral</option>
+              <option>Comporta aberta</option>
+              <option>Cotovelo de 90° raio curto</option>
+              <option>Cotovelo de 90° raio longo</option>
+              <option>Cotovelo de 45°</option>
+              <option>Curva de 90°</option>
+              <option>Curva de 45°</option>
+              <option>Curva de 22,5°</option>
+              <option>Curva de retorno 180°</option>
+              <option>Válvula de gaveta aberta</option>
+              <option>Válvula de ângulo aberta</option>
+              <option>Válvula de globo aberta</option>
+              <option>Válvula de borboleta aberta</option>
+              <option>Válvula de pé com crivo</option>
+              <option>Válvula de retenção</option>
+              <option>Válvula de bóia</option>
+              <option>Saída de tubulação</option>
+
+            </select>   
+        </div> 
+
+        
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Valor do coeficiente K</h3> <br>
+            <input class="form-control border-radius-15" type="number" step="0.01" min="0" id="valor_do_coef_k" placeholder="Valor do coeficiente K" readonly="true" > 
+        </div>    
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Situação</h3> <br>
+            <input class="form-control border-radius-15" type="text" id="situacao_perda_pecaEspecial" placeholder="Situação" readonly="true" > 
+        </div> 
+   
+        <!-- Calculos da perda de carga em peças especiais na sucção -->
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Calcular sucção (peça)</h3> <br>
+            <button class="form-control btn-default border-radius-15" onclick="perda_pecaespecial_succao()" ><span class="glyphicon glyphicon-flash" ></span>Calcular para sucção</button>
+        </div>
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Zerar sucção (peças)</h3> <br>
+            <button class="form-control btn-default border-radius-15" onclick="zerar_perda_pecaespecial_succao()"> <span class="glyphicon glyphicon-flash" ></span>Zerar sucção</button>
+        </div>
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Perdas Acumuladas na sucção</h3> <br>
+            <input  class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_pecas_acumulada_tub_succaoId"  placeholder="Perda acumulada na tubulação de sucção" readonly="true" > 
+        </div>  
+
+        <!-- Calculos da perda de carga em peças especiais no recalque -->
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Calcular recalque (peças)</h3> <br>
+            <button class="form-control btn-default border-radius-15" onclick="perda_pecaespecial_recalque()"><span class="glyphicon glyphicon-flash" ></span>Calcular para recalque</button>
+        </div>
+        <div class="col-md-4" style="padding-top: 20px;">
+            <h3 align="center">Zerar recalque (peças)</h3> <br>
+            <button class="form-control btn-default border-radius-15" onclick="zerar_perda_pecaespecial_recaalque()"> <span class="glyphicon glyphicon-flash" ></span>Zerar recalque</button>
+        </div>
+        <div class="col-md-4" style="padding-top: 20px; padding-bottom: 20px;">
+            <h3 align="center">Perdas acumuladas no recalque</h3> <br>
+            <input class="form-control border-radius-15" type="number" step="0.01" min="0" id="perda_pecas_acumulada_tub_recalqueId" placeholder="Perda acumulada na tubulação de recalque" readonly="true" > 
+        </div>                  
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- FIM DA PARTE QUE CALCULA PERDAS DE CARVA EM PEÇAS ESPECIAIS -->
+  <!-- ******************************************************************************************************************** -->
+
+  <!-- ÍNICI DA PARTE QUE CALCULA O N.P.S.H -->
+  <section id="NPSHdisponivel" style="background-color: white;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" align="center">
+           <hr>
+           <h2><a name="ancora_npsh_disponivel"></a>N.P.S.H (NET POSITIVE SUCTION HEAD) </h2> 
+           <hr>
+
+            <!-- tabela com valores da pre~ssão atmosférica para altitudes -->          
+             <table width="80%" class="table table-striped box-shadow-padrao" style="background-color: #FFF;">
+
+              <th colspan="6"><h3 align="center">Pressão atmosférica em metros de coluna d'água</h3></th>
+              <tr>
+                <td>Altitude em relação ao mar (m)</td>
+                <td>0</td>
+                <td>150</td>
+              </tr>
+
+              <tr>
+                <td>Pressão atmosférica (mca)</td>
+                <td>10,33</td>
+                <td>10,16</td>
+              </tr>
+
+              <tr>
+                <td>Altitude em relação ao mar (m)</td>
+                <td>300</td>
+                <td>450</td>
+              </tr>
+
+              <tr>
+                <td>Pressão atmosférica (mca)</td>
+                <td>9,98</td>
+                <td>9,79</td>
+              </tr>
+
+              <tr>
+                <td>Altitude em relação ao mar (m)</td>
+                <td>600</td>
+                <td>750</td>
+              </tr>
+
+              <tr>
+                <td>Pressão atmosférica (mca)</td>
+                <td>9,58</td>
+                <td>9,35</td>
+              </tr>
+
+              <tr>
+                <td>Altitude em relação ao mar (m)</td>
+                <td>1.000</td>
+                <td>1.250</td>
+              </tr>
+
+              <tr>
+                <td>Pressão atmosférica (mca)</td>
+                <td>9,12</td>
+                <td>8,88</td>
+              </tr>
+
+              <tr>
+                <td>Altitude em relação ao mar (m)</td>
+                <td>1.500</td>
+                <td>2.000</td>
+              </tr>
+
+              <tr>
+                <td>Pressão atmosférica (mca)</td>
+                <td>8,64</td>
+                <td>8,08</td>
+              </tr>             
+          </table>
+
+
+           <!-- tabela com valores da pressão de vapor d'água por altitude -->          
+             <table width="80%" class="table table-striped box-shadow-padrao" style="background-color: #FFF;">
+
+              <th colspan="6"><h3 align="center">Pressão de vapor d'água</h3></th>
+              <tr>
+                <td>Temperatura da água (°C)</td>
+                <td>0</td>
+                <td>4</td>
+              </tr>
+
+              <tr>
+                <td>Pressão de vapor d'água (mca)</td>
+                <td>0,062</td>
+                <td>0,083</td>
+              </tr>
+
+              <tr>
+                <td>Temperatura da água (°C)</td>
+                <td>10</td>
+                <td>20</td>
+              </tr>
+
+              <tr>
+                <td>Pressão de vapor d'água (mca)</td>
+                <td>0,125</td>
+                <td>0,239</td>
+              </tr>
+
+              <tr>
+                <td>Temperatura da água (°C)</td>
+                <td>30</td>
+                <td>40</td>
+              </tr>
+
+              <tr>
+                <td>Pressão de vapor d'água (mca)</td>
+                <td>0433</td>
+                <td>0,753</td>
+              </tr>
+
+              <tr>
+                <td>Temperatura da água (°C)</td>
+                <td>50</td>
+                <td>60</td>
+              </tr>
+
+              <tr>
+                <td>Pressão de vapor d'água (mca)</td>
+                <td>1,258</td>
+                <td>2,31</td>
+              </tr>
+
+              <tr>
+                <td>Temperatura da água (°C)</td>
+                <td>80</td>
+                <td>100</td>
+              </tr>
+
+              <tr>
+                <td>Pressão de vapor d'água (mca)</td>
+                <td>4,831</td>
+                <td>10,33</td>
+              </tr>
+          </table>
+
+        </div>
+        <!-- FIM DAS TABELAS -->
+
+        <div class="row">
+
+          <div class="col-md-6" align="center">
+            <h3>Altitude (m)</h3>
+            <select class="form-control border-radius-15 " id="NPSH_altitudeId" onchange="atribuir_pressao_atm_por_altitude()"  >
+              <option>0</option>
+              <option>150</option>
+              <option>300</option>
+              <option>450</option>
+              <option>600</option>
+              <option>750</option>
+              <option>1.000</option>
+              <option>1.250</option>
+              <option>1.500</option>
+              <option>2.000</option>              
+            </select>             
+          </div>
+
+          <div class="col-md-6" align="center" >
+            <h3>Pressão atmosférica (mca)</h3>
+            <input class="form-control border-radius-15" id="NPSH_Pressao_atmosfericaId" type="number" step="0.01" min="0" readonly="true" placeholder="Pressão atmosférica (mca)">
+          </div>
+
+          
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6" align="center">
+            <h3>Temperatura (°C)</h3>
+            <select class="form-control border-radius-15" id="NPSH_TemperaturaId" onchange="atribuir_pressao_vapor_por_temperatura()" value=' ' >
+              <option>0</option>
+              <option>4</option> 
+              <option>10</option> 
+              <option>20</option> 
+              <option>30</option> 
+              <option>40</option> 
+              <option>50</option> 
+              <option>60</option> 
+              <option>80</option> 
+              <option>100</option>              
+            </select>   
+          </div>
+
+          <div class="col-md-6" align="center">
+            <h3>Pressão de vapor (mca)</h3>
+            <input class="form-control border-radius-15" id="NPSH_Pressao_vaporId" type="number" step="0.01" min="0" readonly="true" placeholder="Valor da pressão de vapor d'água">   
+          </div>
+
+        </div>
+        <hr>
+        <div class="row">
+          <div align="center" class="col-md-6">
+            <h3 >Situação da bomba</h3>
+            <select class="form-control border-radius-15" id="NPSH_situacao_bombaId">
+              <option>Bomba afogada</option>
+              <option>Bomba não afogada</option>  
+            </select>
+          </div>
+
+          <div align="center" class="col-md-6" >
+            <h3>Módulo da altura geométrica de sucção (m)</h3>
+            <input class="form-control border-radius-15" type="number" step="0.01" min="0" id="npsh_altura_geometrica_succaoId" placeholder="Digite a altura geométrica de sucção (em módulo)">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row"> 
+          <div align="center" class="col-md-6" >
+            <h3>Perda de carga na tubulação de sucção (m)</h3>
+            <input class="form-control border-radius-15" id="NPSH_perda_succaoId" type="number" step="0.01" min="0" placeholder="Perda total na tubulação de sucção" readonly="true">
+          </div>
+
+          <div align="center" class="col-md-6" >
+            <h3>N.P.S.H disponível (m)</h3>
+            <input class="form-control border-radius-15" type="number" step="0.01" min="0" id="NPSH_disponivelId" placeholder="N.P.S.H disponível sempre >= N.P.S.H requerido" readonly="true">
+          </div>
+        </div>  
+
+
+
+        <div class="row" style="padding-bottom: 20px;">
+
+          <div class="col-md-6" align="center">
+            <button style="margin-top: 20px" onclick="atribuir_perda_succao_aoNPSH()" class="btn-calcular form-control" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular perda de carga total na sucção</button>
+          </div>
+
+          <div class="col-md-6" align="center">
+            <button style="margin-top: 20px"  onclick="calculo_NPSH()" class="btn-calcular form-control" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular N.P.S.H disponível</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- PARTE RESPONSÁVEL POR MOSTRAR COMPONENTES DO CÁLCULO DE POTÊNCIA DO CONJUNTO MOTOBOMBA -->
+  <section>
+    <div class="container" id="potencia_bomba" style="padding-bottom: 20px;" >
+
+      <div class="row" align="center">
+        <div class="col-md-12">
+          <h2 align="center"><a name="ancora_potencia_bomba" ></a>Potência da bomba</h2>
+        </div>
+      </div>
+
+      <div class="row" align="center">
+        <div class="col-md-4">
+          <h3 align="center">Fluído</h3>
+          <input type="text" class="form-control border-radius-15" value="Água" readonly="true">
+        </div>
+
+        <div class="col-md-4">
+          <h3 align="center">Peso específico (Kgf/m³)</h3>
+          <input type="text" id="potencia_peso_especificoId" class="form-control border-radius-15" value="1000" readonly="true">
+        </div>
+
+        <div class="col-md-4">
+          <h3 align="center">Vazão (m³/s)</h3>
+          <input type="text" id="potencia_vazaoId" class="form-control border-radius-15" placeholder="Aqui aparecerá a vazão" readonly="true">
+
+        </div>
+
+        
+
+      </div>
+
+      <div class="row" align="center">
+
+        <div class="col-md-4">
+          <h3 align="center">Altura manométrica total (m)</h3>
+          <input type="number" id="potencia_AMT_Id" step="0.01" min="0" class="form-control border-radius-15" placeholder="Soma de todas as perdas + desníveis" readonly="true">
+        </div>
+
+        <div class="col-md-5">
+          <h3 align="center">Módulo da altura geométrica de recalque</h3>
+          <input type="number" id="potencia_MAGR_Id" step="0.01" min="0" class="form-control border-radius-15" placeholder="Digite o desnível do recalque" >
+        </div>
+
+        <div class="col-md-3">
+          <h3 align="center">Rendimento (%)</h3>
+          <input type="number" id="potencia_rendimentoId" step="0.01" min="0" class="form-control border-radius-15" placeholder="Digite o rendimento" >
+        </div>  
+      </div>
+
+      <div class="row" align="center">
+
+        <div class="col-md-2">
+          <h3 align="center"></h3>
+        </div>
+
+        <div class="col-md-4">
+          <h3 align="center">Potência hidráulica (CV)</h3>
+          <input type="number" id="potencia_potencia_hidraulicaId" step="0.01" min="0" class="form-control border-radius-15" placeholder="Potência hidráulica" readonly="true">
+        </div>
+
+        <div class="col-md-4">
+          <h3 align="center">Potência consumida (CV)</h3>
+          <input type="number" id="potencia_consumidaId" step="0.01" min="0" class="form-control border-radius-15" placeholder="Potência consumida" readonly="true">
+        </div>
+
+        <div class="col-md-2">
+          <h3 align="center"></h3>
+        </div>
+ 
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          
+        </div>
+        <div class="col-md-4">
+          <button style="margin-top: 20px"  onclick="calculo_potencia()" class="btn-calcular form-control" align="center"> <span class="glyphicon glyphicon-flash" > </span>Calcular potência</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background: darkblue">
+    
+  <div class="row">
+    
+    <div class="col-md-12">
+      <font size="2px" color="lighblue">Desenvolvido por: Alexandre Rodrigues</font>
+    </div>
+    <div class="col-md-12">
+      <font size="2px" color="lighblue">Email: Alexandreacademicoufpr@gmail.com</font>
+    </div>
+
+    <div class="col-md-12">
+      <font size="2px" color="lighblue">Versão 1.0 - 2017</font>
+    </div>
+
+  </div>
+
+
+  </section>
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+  </body>
+</html>
